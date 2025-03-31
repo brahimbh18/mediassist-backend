@@ -1,0 +1,9 @@
+POST http://localhost:8000/api/auth/register.php
+Content-Type: application/json
+
+{
+  "name": "API-Centric Use",
+  "username": "apiuse",
+  "email": "newAapi@test.com",
+  "password": "backend123"
+}
