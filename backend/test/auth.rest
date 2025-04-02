@@ -1,0 +1,29 @@
+### Login Request
+POST http://localhost:8000/api/auth/login.php
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "Test1234"
+}
+
+# ### Test Protected Endpoint (Replace {token} with the token received from login)
+# GET http://localhost:8000/api/auth/middleware.php
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZWRpYXNzaXN0X2JhY2tlbmQiLCJhdWQiOiJtZWRpYXNzaXN0X2Zyb250ZW5kIiwiaWF0IjoxNzQzNjMzNjc5LCJleHAiOjE3NDM2MzcyNzksInN1YiI6MSwidXNlcm5hbWUiOiJ0ZXN0dXNlciJ9.KR1fqXsujZxKw946XKSYs9-c0pdUuilZwqTAPiKPyEQ
+
+### Add Medicament (Replace {token} with the token received from login)
+POST http://localhost:8000/api/medicament.php
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZWRpYXNzaXN0X2JhY2tlbmQiLCJhdWQiOiJtZWRpYXNzaXN0X2Zyb250ZW5kIiwiaWF0IjoxNzQzNjM2MDk1LCJleHAiOjE3NDM2Mzk2OTUsInN1YiI6MSwidXNlcm5hbWUiOiJ0ZXN0dXNlciJ9.J5-Z_ay8BgmSVYJGczQsdz22Xg_pjzHlaaxH0drKtQE
+
+{
+    "name": "Paracetamol",
+    "type": "Pain Relief",
+    "frequency": "Twice daily",
+    "dosage": "500mg",
+    "time": "08:00,20:00"
+}
+
+### Get User's Medicaments (Replace {token} with the token received from login)
+GET http://localhost:8000/api/medicament.php
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtZWRpYXNzaXN0X2JhY2tlbmQiLCJhdWQiOiJtZWRpYXNzaXN0X2Zyb250ZW5kIiwiaWF0IjoxNzQzNjM0NzUwLCJleHAiOjE3NDM2MzgzNTAsInN1YiI6MiwidXNlcm5hbWUiOiJ0ZXN0dXNlciJ9.XOyXpAJ3M2yeniQgtg-zotoVudcO44Bu-iQ7f4Jce-c

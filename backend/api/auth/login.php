@@ -82,7 +82,7 @@ if (isRateLimited($ip)) {
 
 try {
     $input = json_decode(file_get_contents('php://input'), true) ?? [];
-    
+    echo $input;
     $validationErrors = validateLoginData($input);
 
     if (!empty($validationErrors)) {
@@ -101,7 +101,6 @@ try {
         http_response_code(401);
         exit(json_encode(['error' => 'Invalid credentials']));
     }
-  
     logLoginActivity($pdo, $user['id'], true);
 
     $payload = [

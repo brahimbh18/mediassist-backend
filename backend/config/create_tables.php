@@ -45,6 +45,7 @@ function createMedicamentTable() {
         $query = "CREATE TABLE IF NOT EXISTS Medicament (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
+            photo TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )";
@@ -68,7 +69,6 @@ function createPrescribedMedicamentsTable() {
             frequency TEXT,
             dosage TEXT,
             time TEXT,
-            photo TEXT,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES User(id),

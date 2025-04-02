@@ -7,7 +7,7 @@
 $dbPath = __DIR__ . '/mediassist.db';
 
 function logError(string $message): void {
-    // Log the error to the default error log or to a file
+    error_log($message, 3, __DIR__ . '/../logs/errors.log');
 }
 
 // Update the PDO error handling:
@@ -23,12 +23,11 @@ function getDatabaseConnection() {
 
         return $pdo;
     } catch (PDOException $e) {
-        // Handle connection errors
-        die("Database connection failed: " . $e->getMessage());
-    } catch (PDOException $e) {
-        error_log($e->getMessage(), 3, __DIR__ . '/../logs/errors.log');
-        die("Database error: " . $e->getMessage());
-       
+        // Log the error
+        logError("Database connection failed: " . $e->getMessage());
+        
+        // Throw a new exception with a user-friendly message
+        throw new Exception("Database connection failed. Please try again later.");
     }
 }
 
