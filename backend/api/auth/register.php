@@ -62,30 +62,30 @@ function validateRegistrationData(array $data): array {
 }
 
 
-// $ip = $_SERVER['REMOTE_ADDR'];
-// if (isRateLimited($ip)) {
-//     http_response_code(429);
-//     die(json_encode(['error' => 'Too many requests']));
-// }
+$ip = $_SERVER['REMOTE_ADDR'];
+if (isRateLimited($ip)) {
+    http_response_code(429);
+    die(json_encode(['error' => 'Too many requests']));
+}
 
 try {
     $input = json_decode(file_get_contents('php://input'), true) ?? [];
     
-    $validationErros = validateRegistrationData($input);
-    if (!empty($validationErros)) {
+    $validationErrors = validateRegistrationData($input);
+    if (!empty($validationErrors)) {
         http_response_code(422);
-        echo json_encode(['errors' => $validationErros]);
+        echo json_encode(['errors' => $validationErrors]);
         exit;
     }
 
     $pdo = getDatabaseConnection();
 
-    $stmt = $pdo->prepare("SELECT id FROM User WHERE email = ?");
-    $stmt->execute([$input['email']]);
+    $stmt = $pdo->prepare("SELECT id FROM User WHERE username = ?");
+    $stmt->execute([$input['username']]);
 
     if ($stmt->fetch()) {
         http_response_code(409);
-        echo json_encode(['error' => 'Email already registered']);
+        echo json_encode(['error' => 'Username already registered']);
         exit;
     }
 
